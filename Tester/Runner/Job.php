@@ -24,7 +24,7 @@ class Job
 		CODE_NONE = -1,
 		CODE_OK = 0,
 		CODE_SKIP = 253,
-		CODE_ERROR = 255,
+		CODE_ERROR = 252,
 		CODE_FAIL = 254;
 
 	/** @var string  test file */
@@ -145,12 +145,12 @@ class Job
 				$this->headers[trim(substr($header, 0, $a))] = (string) trim(substr($header, $a + 1));
 			}
 		}
-
+		
 		if ($res === self::CODE_SKIP) {
 			throw new JobException($this->output, JobException::SKIPPED);
 
 		} elseif ($res !== self::CODE_OK) {
-			throw new JobException($this->output ?: 'Fatal error');
+			throw new JobException($this->output ?: "Fatal error (code $res)");
 		}
 
 		// HTTP code check
