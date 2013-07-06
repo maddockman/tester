@@ -49,6 +49,7 @@ class Runner
 	public function __construct(PhpExecutable $php, $logFile = NULL)
 	{
 		$this->php = $php;
+		$this->printAndLog("Log: $logFile");
 		$this->logFile = $logFile ? fopen($logFile, 'w') : NULL;
 	}
 
