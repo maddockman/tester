@@ -84,8 +84,7 @@ class Runner
 			$this->printAndLog("\n" . implode($this->results[self::FAILED]), FALSE);
 			$this->printAndLog("\nFAILURES! (" . count($tests) . ' tests, '
 				. count($this->results[self::FAILED]) . ' failures, '
-				. count($this->results[self::SKIPPED]) . ' skipped, ' . sprintf('%0.1f', $time) . ' seconds)')
-			);
+				. count($this->results[self::SKIPPED]) . ' skipped, ' . sprintf('%0.1f', $time) . ' seconds)');
 			return FALSE;
 		} else {
 			$this->printAndLog("\n\nOK (" . count($tests) . ' tests, '
