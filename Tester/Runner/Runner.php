@@ -36,9 +36,6 @@ class Runner
 	/** @var int  run jobs in parallel */
 	public $jobs = 1;
 
-	/** @var bool  display colors in the result? */
-	public $displayColors = FALSE;
-
 	/** @var resource */
 	private $logFile;
 
@@ -52,8 +49,10 @@ class Runner
 	public function __construct(PhpExecutable $php, $logFile = NULL)
 	{
 		$this->php = $php;
-		$this->printAndLog("Log: $logFile");
-		$this->logFile = $logFile ? fopen($logFile, 'w') : NULL;
+		if ($logFile) {
+			$this->printAndLog("Log: $logFile");
+			$this->logFile = fopen($logFile, 'w');
+		}
 	}
 
 
@@ -86,6 +85,7 @@ class Runner
 				. count($this->results[self::FAILED]) . ' failures, '
 				. count($this->results[self::SKIPPED]) . ' skipped, ' . sprintf('%0.1f', $time) . ' seconds)');
 			return FALSE;
+
 		} else {
 			$this->printAndLog("\n\nOK (" . count($tests) . ' tests, '
 				. count($this->results[self::SKIPPED]) . ' skipped, ' . sprintf('%0.1f', $time) . ' seconds)');
